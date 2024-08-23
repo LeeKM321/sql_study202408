@@ -109,6 +109,12 @@ EMPLOYEES 테이블에서 이름, 입사일자 컬럼으로 변경(별칭)해서
 조건 1) 이름 컬럼은 first_name, last_name을 붙여서 출력합니다. (CONCAT)
 조건 2) 입사일자 컬럼은 xx/xx/xx로 저장되어 있습니다. xxxxxx형태로 변경해서 출력합니다. (REPLACE)
 */
+SELECT
+    CONCAT(first_name, last_name) AS 이름,
+    REPLACE(hire_date, '/', '') AS 입사일자
+FROM employees
+ORDER BY 이름;
+
 
 
 /*
@@ -118,6 +124,9 @@ EMPLOYEES 테이블에서 phone_number컬럼은 ###.###.####형태로 저장되�
 여기서 처음 세 자리 숫자 대신 서울 지역변호 (02)를 붙여 
 전화 번호를 출력하도록 쿼리를 작성하세요. (CONCAT, SUBSTR 사용)
 */
+SELECT
+    CONCAT('(02)', SUBSTR(phone_number, 5)) AS 전화번호
+FROM employees;
 
 
 /*
@@ -130,6 +139,11 @@ EMPLOYEES 테이블에서 JOB_ID가 it_prog인 사원의 이름(first_name)과 �
 조건 3) 급여는 전체 10자리로 출력하되 나머지 자리는 *로 출력합니다. 
 이 열의 열 별칭은 salary입니다.(힌트 : lpad 이용)
 */
+SELECT
+    RPAD(SUBSTR(first_name, 1, 3), LENGTH(first_name), '*') AS name,
+    LPAD(salary, 10, '*') AS salary
+FROM employees
+WHERE LOWER(job_id) = 'it_prog';
 
 
 
